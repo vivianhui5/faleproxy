@@ -2,7 +2,9 @@ name: Faleproxy CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
+      - '**'   # this means all branches
   pull_request:
     branches: [ main, master ]
 
