@@ -41,7 +41,7 @@ jobs:
       if: always()
       uses: vercel/repository-dispatch/actions/status@v1
       with:
-        name: Vercel - faleproxy: test
+        name: 'Vercel - faleproxy: test'
         
   deploy:
     needs: test
