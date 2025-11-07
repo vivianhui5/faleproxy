@@ -32,17 +32,21 @@ jobs:
       run: npm run test:ci
       
     - name: Upload coverage report
-      if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: coverage-report-${{ matrix.node-version }}
+        name: coverage-report
         path: coverage/
-        if-no-files-found: warn
+    
+    - name: Notify Vercel
+      if: always()
+      uses: vercel/repository-dispatch/actions/status@v1
+      with:
+        name: Vercel - faleproxy: test
         
   deploy:
     needs: test
     if: |
-      success() &&
+      github.event_name == 'push' &&
       (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     runs-on: ubuntu-latest
     
